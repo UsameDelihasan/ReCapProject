@@ -1,5 +1,6 @@
-﻿using DataAccess.Abstract.EntityFramework;
+﻿using Core.Abstract.EntityFramework;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -9,7 +10,14 @@ namespace DataAccess.Abstract
 {
     public interface ICarDal : IEntityRepository<Car>
     {
-        
+
+         Car GetById(int id);
+         Car GetByBrandId(int id);
+         Car GetByColorId(int id);
+
+        List<CarDetailDto> GetCarDetails();
+
+
 
     }
 }
