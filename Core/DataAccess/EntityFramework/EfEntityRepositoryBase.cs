@@ -56,14 +56,14 @@ namespace Core.DataAccess.EntityFramework
             }
         }
 
-        //public TEntity GetById(Expression<Func<TEntity,bool>> filter)
-        //{
-        //    using (TContext reCapProjectContext = new TContext())
-        //    {
-        //        return reCapProjectContext.Set<TEntity>().SingleOrDefault(filter);
+        public TEntity Get(Expression<Func<TEntity, bool>> filter)
+        {
+            using (TContext reCapProjectContext = new TContext())
+            {
+                return reCapProjectContext.Set<TEntity>().SingleOrDefault(filter);
 
-        //    }
-        //}
+            }
+        }
 
 
     }

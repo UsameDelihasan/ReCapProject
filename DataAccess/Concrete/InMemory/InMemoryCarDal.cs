@@ -37,6 +37,11 @@ namespace DataAccess.Concrete.InMemory
             _cars.Remove(car);
         }
 
+        public Car Get(Expression<Func<Car, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Car> GetAll(Expression<Func<Car, bool>> filter)
         {
             return _cars.ToList();
@@ -52,10 +57,7 @@ namespace DataAccess.Concrete.InMemory
             throw new NotImplementedException();
         }
 
-        public Car GetById(int id)
-        {
-            return _cars.SingleOrDefault(c => c.Id == id);
-        }
+        
 
         public List<CarDetailDto> GetCarDetails()
         {

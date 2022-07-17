@@ -1,4 +1,5 @@
-﻿using Core.DataAccess.EntityFramework;
+﻿using Core.Abstract.EntityFramework;
+using Core.DataAccess.EntityFramework;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -50,13 +51,7 @@ namespace DataAccess.Concrete.EntityFramework
 
 
 
-        public Car GetById(int id)
-        {
-            using (ReCapProjectContext reCapProjectContext = new ReCapProjectContext())
-            {
-                return reCapProjectContext.Set<Car>().SingleOrDefault(p => p.Id ==id);
-            }
-        }
+        
 
         public Car GetByBrandId(int Id)
         {

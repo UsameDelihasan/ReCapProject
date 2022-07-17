@@ -12,6 +12,7 @@ namespace Core.Abstract.EntityFramework
         void Update(T car);
         void Delete(T car);
         List<T> GetAll(Expression<Func<T, bool>> filter);
-        
+        T Get(Expression<Func<T, bool>> filter);
+
     }
 }

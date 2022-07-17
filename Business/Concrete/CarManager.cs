@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constant;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -19,63 +21,74 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        public List<Car> GetAll()
+        public IDataResult<List<Car>> GetAll()
         {
-            return _carDal.GetAll(null);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(null),Messages.SuccessResult);
         }
 
-        public Car GetById(int id)
+        public IDataResult<Car> GetById(int id)
         {
-            return _carDal.GetById(id);
-          
+            return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == id), Messages.SuccessResult);
         }
 
 
         
-        public void Add(Car car)
+        public IResult Add(Car car)
         {
+             
+
             if (car.CarName.Length>=2 )
             {
                 if (car.DailyPrice > 0)
                 {
                     _carDal.Add(car);
+
+                    
+
+                    return new SuccessResult(Messages.SuccessResult);
                 }
 
                 else
                 {
                     Console.WriteLine("Araba günlük fiyatı 0'dan büyük olmalıdır.");
+                    return new ErrorResult(Messages.ErrorResult);
                 }
             }
             else
             {
 
                 Console.WriteLine("Araba ismi en az 2 karakterli olmalı veya araba günlük fiyatı 0'dan büyük olmalı");
+                return new ErrorResult(Messages.ErrorResult);
             }
+
         }
 
-        public void Update(Car car)
+        public IResult Update(Car car)
         {
             _carDal.Update(car);
+
+            return new SuccessResult(Messages.SuccessResult);
         }
 
-        public void Delete(Car car)
+        public IResult Delete(Car car)
         {
             _carDal.Delete(car);
+            return new SuccessResult(Messages.SuccessResult);
         }
 
-        public Car GetCarsByBrandId(int id)
+        public IDataResult<Car> GetCarsByBrandId(int id)
         {
-            return _carDal.GetByBrandId(id);
+            return new SuccessDataResult<Car>(_carDal.GetByBrandId(id), Messages.SuccessResult);
         }
 
-        public Car GetCarsByColorsId(int id)
+        public IDataResult<Car> GetCarsByColorsId(int id)
         {
-            return _carDal.GetByColorId(id);
+            return new SuccessDataResult<Car>(_carDal.GetByColorId(id), Messages.SuccessResult);
         }
 
-        public List<CarDetailDto> GetCarDetails()
+        public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            return _carDal.GetCarDetails();
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(), Messages.SuccessResult);
         }
     }
 }
