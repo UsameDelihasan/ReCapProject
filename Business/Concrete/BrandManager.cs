@@ -11,6 +11,8 @@ namespace Business.Concrete
 {
     public class BrandManager : IBrandService
     {
+        //loosely coupled
+
         IBrandDal _brandDal;
 
         public BrandManager(IBrandDal brandDal)

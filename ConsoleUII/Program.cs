@@ -15,6 +15,7 @@ namespace ConsoleUII
         {
 
             
+            
 
             //Car Tesla = new Car() { Id = 1, BrandId = 2, CarName = "Tesla Cybertruck", ColorId = 1, DailyPrice = 200, Description = " Elektrikli araba", ModelYear = 2020 };
             //Car TOGG = new Car() { Id = 2, BrandId = 1, CarName = "TOGG C-SUV", ColorId = 3, DailyPrice = 500, Description = " Milli Elektrikli araba", ModelYear = 2022 };
@@ -38,11 +39,12 @@ namespace ConsoleUII
             ICarService carManager = new CarManager(new EfCarDal());
             IRentalService rentalManager = new RentalManager(new EfRentalDal());
 
+            Car car = new Car() { BrandId = 1, CarName = "Tesla", ColorId = 1, DailyPrice = 20, Description = "pahalı", Id = 1, ModelYear = 2002 };
+            carManager.Add(car);
 
 
-
-            var getAll = carManager.GetAll();
-            var getAllColors = colorManager.GetAll();
+            //var getAll = carManager.GetAll();
+            //var getAllColors = colorManager.GetAll();
 
             //var getCarDetails= carManager.GetCarDetails();
 
