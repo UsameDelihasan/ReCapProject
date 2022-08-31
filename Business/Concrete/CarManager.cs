@@ -1,9 +1,13 @@
 ﻿using Business.Abstract;
 using Business.Constant;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConserns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,34 +36,12 @@ namespace Business.Concrete
         }
 
 
-        
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
-             
 
-            if (car.CarName.Length>=2 )
-            {
-                if (car.DailyPrice > 0)
-                {
-                    _carDal.Add(car);
-
-                    
-
-                    return new SuccessResult(Messages.SuccessResult);
-                }
-
-                else
-                {
-                    Console.WriteLine("Araba günlük fiyatı 0'dan büyük olmalıdır.");
-                    return new ErrorResult(Messages.ErrorResult);
-                }
-            }
-            else
-            {
-
-                Console.WriteLine("Araba ismi en az 2 karakterli olmalı veya araba günlük fiyatı 0'dan büyük olmalı");
-                return new ErrorResult(Messages.ErrorResult);
-            }
+            _carDal.Add(car);
+            return new SuccessResult(Messages.SuccessResult);
 
         }
 
