@@ -27,18 +27,21 @@ namespace WebAPI
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+
+       
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
 
 
-            //services.AddSingleton<ICarService,CarManager>();
-            //services.AddSingleton<ICarDal, EfCarDal>();
 
-            //services.AddControllers();
-            //services.AddSingleton<IBrandService, BrandManager>();
-            //services.AddSingleton<IBrandDal, EfBrandDal>();
+            services.AddSingleton<ICarService,CarManager>();
+            services.AddSingleton<ICarDal, EfCarDal>();
 
+            services.AddSingleton<IBrandService, BrandManager>();
+            services.AddSingleton<IBrandDal, EfBrandDal>();
+
+            services.AddSwaggerDocument();
             //services.AddControllers();
             //services.AddSingleton<IColorService, ColorManager>();
             //services.AddSingleton<IColorDal, EfColorDal>();
@@ -57,35 +60,23 @@ namespace WebAPI
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+          if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+              
             }
 
             app.UseHttpsRedirection();
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
+
+            app.UseDeveloperExceptionPage();
+
 
             app.UseRouting();
 

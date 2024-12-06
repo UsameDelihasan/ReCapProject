@@ -21,7 +21,7 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpGet("getall")]
+        [HttpGet]
         public IActionResult GetAll()
         {
 
@@ -37,7 +37,7 @@ namespace WebAPI.Controllers
 
         }
 
-        [HttpGet("getbyid")]
+        [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
 
@@ -53,8 +53,8 @@ namespace WebAPI.Controllers
 
         }
 
-        [HttpPost("add")]
-        public IActionResult Post(Color color)
+        [HttpPost]
+        public IActionResult Post([FromBody] Color color)
         {
 
             var result = _colorService.Add(color);
